@@ -87,6 +87,8 @@ cvar_t	*gender_auto;
 
 cvar_t	*cl_vwep;
 
+cvar_t  *cl_hack_nocinematics;
+
 client_static_t	cls;
 client_state_t	cl;
 
@@ -1484,7 +1486,10 @@ void CL_InitLocal (void)
 	gender->modified = false; // clear this so we know when user sets it manually
 
 	cl_vwep = Cvar_Get ("cl_vwep", "1", CVAR_ARCHIVE);
-
+	
+	// Q2TTM: add cvar to stop cinematics from playing (cl_hack_nocinematics = 1 = no movies).
+	cl_hack_nocinematics = Cvar_Get ("cl_hack_nocinematics", "0", CVAR_ARCHIVE);
+	//
 
 	//
 	// register our commands

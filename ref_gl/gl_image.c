@@ -1394,14 +1394,29 @@ image_t	*GL_FindImage (char *name, imagetype_t type)
 	}
 	else if (!strcmp(name+len-4, ".wal"))
 	{
-		image = GL_LoadWal (name);
+		if (gl_hack_noimages->value)    // Q2TTM: if gl_hack_noimages is "1", apply the "r_notexture" texture to all wal files and do not load from disk
+		{
+			image = r_notexture;
+		}
+		else
+		{
+			image = GL_LoadWal (name);
+		}
 	}
 	else if (!strcmp(name+len-4, ".tga"))
 	{
-		LoadTGA (name, &pic, &width, &height);
-		if (!pic)
-			return NULL; // ri.Sys_Error (ERR_DROP, "GL_FindImage: can't load %s", name);
-		image = GL_LoadPic (name, pic, width, height, type, 32);
+		if (gl_hack_noimages->value)    // Q2TTM: if gl_hack_noimages is "1", apply the "r_notexture" texture to all tga files and do not load from disk
+		{
+			image = r_notexture;
+		}
+		else
+		{
+			LoadTGA (name, &pic, &width, &height);
+			if (!pic)
+				return NULL; // ri.Sys_Error (ERR_DROP, "GL_FindImage: can't load %s", name);
+			image = GL_LoadPic (name, pic, width, height, type, 32);
+		}
+
 	}
 	else
 		return NULL;	//	ri.Sys_Error (ERR_DROP, "GL_FindImage: bad extension on: %s", name);

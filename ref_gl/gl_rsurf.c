@@ -1222,10 +1222,16 @@ void R_DrawWorld (void)
 	{
 		GL_EnableMultitexture( true );
 
-		GL_SelectTexture( GL_TEXTURE0);
-		GL_TexEnv( GL_REPLACE );
-		GL_SelectTexture( GL_TEXTURE1);
-
+		if ( gl_hack_notextures->value )
+		{
+			// Q2TTM: don't apply textures to world surfaces, if set to "1"
+		}
+		else
+		{
+			GL_SelectTexture( GL_TEXTURE0);
+			GL_TexEnv( GL_REPLACE );
+			GL_SelectTexture( GL_TEXTURE1);
+		}
 		if ( gl_lightmap->value )
 			GL_TexEnv( GL_REPLACE );
 		else 

@@ -291,6 +291,10 @@ extern	cvar_t	*cl_timedemo;
 
 extern	cvar_t	*cl_vwep;
 
+// Q2TTM: add cvar to stop cinematics from playing (cl_hack_nocinematics = 1 = no movies).
+extern  cvar_t  *cl_hack_nocinematics;
+//
+
 typedef struct
 {
 	int		key;				// so entities can reuse same entry

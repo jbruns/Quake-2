@@ -1160,14 +1160,24 @@ static void ConsoleFunc( void *unused )
 
 static void UpdateSoundQualityFunc( void *unused )
 {
-	if ( s_options_quality_list.curvalue )
+	if ( s_options_quality_list.curvalue == 1 )    // Q2TTM: values shifted by 1 to accomodate 8 KHz audio, also add 44 KHz
 	{
-		Cvar_SetValue( "s_khz", 22 );
-		Cvar_SetValue( "s_loadas8bit", false );
+		Cvar_SetValue( "s_khz", 11 );    // low
+		Cvar_SetValue( "s_loadas8bit", true );
+	}
+	else if ( s_options_quality_list.curvalue == 2 )
+	{
+		Cvar_SetValue( "s_khz", 22 );    // high
+		Cvar_SetValue( "s_loadas8bit", false );	
+	}
+	else if ( s_options_quality_list.curvalue == 3 )
+	{
+		Cvar_SetValue( "s_khz", 44 );    // highest
+		Cvar_SetValue( "s_loadas8bit", false );		
 	}
 	else
 	{
-		Cvar_SetValue( "s_khz", 11 );
+		Cvar_SetValue( "s_khz", 8 );    // lowest
 		Cvar_SetValue( "s_loadas8bit", true );
 	}
 	
@@ -1194,7 +1204,7 @@ void Options_MenuInit( void )
 	};
 	static const char *quality_items[] =
 	{
-		"low", "high", 0
+		"lowest", "low", "high", "highest", 0    // Q2TTM: support 8 KHz audio (lowest = 0/8, low = 1/11, high = 2/22, highest = 3/44)
 	};
 
 	static const char *compatibility_items[] =

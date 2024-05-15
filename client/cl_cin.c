@@ -606,6 +606,13 @@ void SCR_PlayCinematic (char *arg)
 		return;
 	}
 
+	if (cl_hack_nocinematics->value)    // Q2TTM: if set to "1", skip cinematics
+	{
+		SCR_FinishCinematic ();
+		cl.cinematictime = 0;	// done
+		return;
+	}
+
 	Com_sprintf (name, sizeof(name), "video/%s", arg);
 	FS_FOpenFile (name, &cl.cinematic_file);
 	if (!cl.cinematic_file)

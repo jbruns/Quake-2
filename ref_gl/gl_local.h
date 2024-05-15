@@ -233,6 +233,9 @@ extern	cvar_t	*gl_texturesolidmode;
 extern  cvar_t  *gl_saturatelighting;
 extern  cvar_t  *gl_lockpvs;
 
+extern  cvar_t  *gl_hack_noimages;
+extern  cvar_t  *gl_hack_notextures;
+
 extern	cvar_t	*vid_fullscreen;
 extern	cvar_t	*vid_gamma;
 

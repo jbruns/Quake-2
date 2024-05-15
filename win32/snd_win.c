@@ -357,12 +357,14 @@ sndinitstat SNDDMA_InitDirect (void)
 	dma.channels = 2;
 	dma.samplebits = 16;
 
-	if (s_khz->value == 44)
+	if (s_khz->value == 44)    // Q2TTM: handle full-range of audio bitrates 8 to 44 KHz
 		dma.speed = 44100;
 	if (s_khz->value == 22)
 		dma.speed = 22050;
-	else
+	if (s_khz->value == 11)
 		dma.speed = 11025;
+	else
+		dma.speed = 8000;
 
 	Com_Printf( "Initializing DirectSound\n");
 
@@ -455,12 +457,14 @@ qboolean SNDDMA_InitWav (void)
 	dma.channels = 2;
 	dma.samplebits = 16;
 
-	if (s_khz->value == 44)
+	if (s_khz->value == 44)    // Q2TTM: handle full-range of audio bitrates 8 to 44 KHz
 		dma.speed = 44100;
 	if (s_khz->value == 22)
 		dma.speed = 22050;
-	else
+	if (s_khz->value == 11)
 		dma.speed = 11025;
+	else
+		dma.speed = 8000;
 
 	memset (&format, 0, sizeof(format));
 	format.wFormatTag = WAVE_FORMAT_PCM;

@@ -131,6 +131,11 @@ cvar_t	*gl_lockpvs;
 
 cvar_t	*gl_3dlabs_broken;
 
+// Q2TTM: add cvars to disable image loading (gl_hack_noimages) and texture application to world surfaces (gl_hack_notextures).
+cvar_t  *gl_hack_noimages;
+cvar_t  *gl_hack_notextures;
+//
+
 cvar_t	*vid_fullscreen;
 cvar_t	*vid_gamma;
 cvar_t	*vid_ref;
@@ -841,7 +846,7 @@ void R_RenderView (refdef_t *fd)
 	R_DrawWorld ();
 
 	R_DrawEntitiesOnList ();
-
+	
 	R_RenderDlights ();
 
 	R_DrawParticles ();
@@ -1033,6 +1038,11 @@ void R_Register( void )
 	gl_saturatelighting = ri.Cvar_Get( "gl_saturatelighting", "0", 0 );
 
 	gl_3dlabs_broken = ri.Cvar_Get( "gl_3dlabs_broken", "1", CVAR_ARCHIVE );
+
+	// Q2TTM: add cvars to disable image loading (gl_hack_noimages) and texture application to world surfaces (gl_hack_notextures).
+	gl_hack_noimages = ri.Cvar_Get( "gl_hack_noimages", "0", CVAR_ARCHIVE );
+    gl_hack_notextures = ri.Cvar_Get( "gl_hack_notextures", "0", CVAR_ARCHIVE );
+	//
 
 	vid_fullscreen = ri.Cvar_Get( "vid_fullscreen", "0", CVAR_ARCHIVE );
 	vid_gamma = ri.Cvar_Get( "vid_gamma", "1.0", CVAR_ARCHIVE );
